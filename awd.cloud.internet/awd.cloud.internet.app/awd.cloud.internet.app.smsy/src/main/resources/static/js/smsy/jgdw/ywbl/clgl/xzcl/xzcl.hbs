@@ -1,0 +1,51 @@
+<div class="page">
+  <div class="page-content" style="padding-top: 0px">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left" style="display: inline-block">
+          <a href="javascript:void(0);" class="back link">
+            <i class="icon icon-back"></i>
+            <span style="padding-top:3px">新增车辆</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-block " style="margin-top: 3px">
+      <form id="fm" method="post">
+        <ul style="height:50rem;">
+          <!-- Text inputs -->
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsaddressIcon"></i>
+                <div class="item-title label" style="width: 102px">所属单位：</div>
+                <div class="item-input">
+                  <input type="text" readonly placeholder="所属单位" value="{{model.dwbhString}}">
+                  <input type="text" name="jsbh" style="display:none" value="{{model.dwbh}}">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsCarCardIcon"></i>
+                <div class="item-title label" style="width: 102px;">车牌号：</div>
+                <div class="item-input">
+                  <div class="item-input">
+                    <input type="text" style="" name="cph" value="" placeholder="填写车牌号" >
+                  </div>
+                </div>
+              </div>
+          </li>
+          <li style="padding-top:30px;">
+          	<a href="#" id="saveClgl" class="button button-big button-round button-fill button-raised login-modal" style="width:95%;left:3%;color:ghostwhite;">新增车辆</a>
+          </li>
+        </ul>
+      
+      </form>
+    </div>
+  </div>
+</div>

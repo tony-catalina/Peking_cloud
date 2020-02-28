@@ -1,0 +1,27 @@
+<div class="page">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a href="javascript:void(0);" class="link back">
+				<i class="icon icon-back"></i>
+				<span style="padding-top: 3px">工作告知</span>
+			</a>
+		</div>
+	</div>
+	<div class="list-block accordion-list">
+		<ul style="padding-top: 25px;height:50rem;">
+			{{#each data}}
+				<li class="accordion-item"><a href="javascript:void(0);" class="item-content item-link">
+						<div class="item-inner">
+							<div class="item-title">{{gzrq}}</div>
+						</div>
+					</a>
+					<div class="accordion-item-content">
+						<div class="content-block">
+							<p>{{ggnr}}</p>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</div>

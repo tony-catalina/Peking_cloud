@@ -1,0 +1,20 @@
+<div class="content-block">
+  <div class="list-block">
+    <ul>
+		{{#each data}}
+		<li class="/*swipeout*/">
+			<div class="/*swipeout-content*/ item-content">
+				<div class="item-media"><i class="f7-icons color-blue">person</i></div>
+				<div class="item-inner">
+					<div class="item-title rydetail" uuid="{{uuid}}">{{xyrxm}}({{filenum}})</div>
+					<div class="item-after" style="font-size:10px;">{{phaseString}}</div>
+				</div>
+			</div>
+			<!-- <div class="swipeout-actions-right">
+				<a href="javascript:void(0);" dataid="{{id}}" class="action2 bg-red">取消收押</a>
+			</div> -->
+		</li>
+		{{/each}}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.LogsDao">
+    <resultMap id="LogsResultMap" type="awd.cloud.internet.servers.server.entity.LogsEntity">
+        <result property="productId" column="productId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="productName" column="productName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="logId" column="logId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="operatorId" column="operatorId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="operatorAccount" column="operatorAccount" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="operatorIdentity" column="operatorIdentity" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+        <result property="operatorName" column="operatorName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="organizationName" column="organizationName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="organizationId" column="organizationId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="opTime" column="opTime" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="resTime" column="resTime" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="terminalType" column="terminalType" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="terminalId" column="terminalId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="terminalNum" column="terminalNum" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="terminalMac" column="terminalMac" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="opType" column="opType" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+        <result property="operateCondition" column="operateCondition" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="operateResult" column="operateResult" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+        <result property="errCode" column="errCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="clientIp" column="clientIp" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="clientPort" column="clientPort" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="url" column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="objectParam" column="objectParam" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="sessionId" column="sessionId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="funcModuleName" column="funcModuleName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="objectIp" column="objectIp" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="objectPort" column="objectPort" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="querySql" column="querySql" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'LogsResultMap'"/>
+        <bind name="tableName" value="'logs'"/>
+    </sql>
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.LogsEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from logs where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="LogsResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid" resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+</mapper>

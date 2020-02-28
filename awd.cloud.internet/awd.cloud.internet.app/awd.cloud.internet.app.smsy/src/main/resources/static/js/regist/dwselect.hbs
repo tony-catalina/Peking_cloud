@@ -1,0 +1,25 @@
+<p><a href="#"  class="button button-round button-fill close-popup">关闭</a></p>
+<div class="searchbar searchbar-badw">
+    <div class="searchbar-input">
+        <input type="search" placeholder="请输入单位名称...">
+        <a href="#" class="searchbar-clear"></a>
+    </div>
+    <a href="#" class="searchbar-cancel">取消</a>
+</div>
+<div class="searchbar-overlay"></div>
+<div class="page-content">
+    <div class="content-block searchbar-not-found">
+	未搜索到结果...
+    </div>
+    <div class="list-block list-block-search searchbar-found" style="margin-top: 0px;">
+        <ul id="selectBadw">
+		{{#each data}}
+			<li class="item-content jsmc" value="{{dwbh}}" jsmc="{{dwmc}}" type="{{type}}">
+				<div class="item-inner">
+					<div class="item-title" style="font-size:1.2rem;color:cornflowerblue">{{dwmc}}</div>
+				</div>
+			</li>
+		{{/each}}
+  		</ul>
+    </div>
+</div>

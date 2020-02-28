@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.FileDao">
+    <resultMap id="FileResultMap" type="awd.cloud.internet.servers.server.entity.FileEntity">
+        <result property="id" column="id" javaType="java.lang.String" jdbcType="CHAR"/>
+
+        <result property="file" column="file" javaType="[B" jdbcType="BLOB"/>
+
+        <result property="filepath" column="filepath" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="uuid" column="uuid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="suffix" column="suffix" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'FileResultMap'"/>
+        <bind name="tableName" value="'file'"/>
+    </sql>
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.FileEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from file where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="FileResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid" resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+    <!--<update id="updateFile" parameterType="map">
+        UPDATE FILE SET FILE = #{file},FILEPATH=#{filepath} WHERE UUID = #{uuid}
+    </update>
+    <insert id="insertOne" parameterType="map">
+        INSERT INTO detain.file
+		(ID, FILE, FILEPATH, UUID)
+		VALUES(#{id},#{file}, #{filepath}, #{uuid})
+    </insert>-->
+    <select id="queryByUuid" resultMap="FileResultMap" parameterType="String">
+        SELECT * FROM FILE WHERE UUID = #{uuid}
+    </select>
+</mapper>

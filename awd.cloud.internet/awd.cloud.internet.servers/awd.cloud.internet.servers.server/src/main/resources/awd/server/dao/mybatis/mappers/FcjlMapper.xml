@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.FcjlDao">
+    <resultMap id="FcjlResultMap" type="awd.cloud.internet.servers.server.entity.FcjlEntity">
+    
+		<result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+		<result property="jsbh" column="jsbh" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		
+		<result property="badw" column="badw" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+		
+		<result property="fcuuid" column="fcuuid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		
+		<result property="fcsj" column="fcsj" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		
+		<result property="cph" column="cph" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		
+		<result property="mjsl" column="mjsl" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+        <result property="basl" column="basl" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+        <result property="yssl" column="yssl" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        
+		<result property="fczt" column="fczt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		
+		<result property="state" column="state" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'FcjlResultMap'"/>
+        <bind name="tableName" value="'fcjl'"/>
+    </sql>
+
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.FcjlEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from fcjl where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="FcjlResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid"  resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+    
+    <update id="updateFcztByFcuuid" parameterType="String">
+    	update fcjl set fczt=#{fczt} 
+    	<if test="fczt == 4"> 
+    	, state ="R3"
+    	</if>
+    	where fcuuid=#{fcuuid} 
+    </update>
+    
+    <select id="selectFcjlByFcuuid" parameterType="String" resultMap="FcjlResultMap">
+    	select * from fcjl where fcuuid=#{fcuuid}
+    </select>
+    
+</mapper>

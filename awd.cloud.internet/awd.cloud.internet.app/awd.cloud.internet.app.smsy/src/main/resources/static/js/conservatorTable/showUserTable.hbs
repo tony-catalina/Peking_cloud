@@ -1,0 +1,23 @@
+	        <ul>
+			{{#each result.data}}
+		    <li class="swipeout" >
+		      <div class="swipeout-content item-content">
+		        <div class="item-media"><i class="f7-icons color-blue">person</i></div>
+		        <div class="item-inner">
+		          <div class="item-title">{{username}}</div>
+		          <div class="item-title">警号：{{jh}}</div>
+		          <div class="item-after">{{stateString}}</div>
+		        </div>
+		      </div>
+		      {{#equal state "R3"}}
+		      <div class="swipeout-actions-right">
+		        <a href="javascript:void(0);" dataid="{{id}}" class="action1 bg-blue">启用</a>
+		      </div>
+		      {{else}}
+		      <div class="swipeout-actions-right">
+		        <a href="javascript:void(0);" dataid="{{id}}" class="action2 bg-red">禁用</a>
+		      </div>
+		      {{/equal}}
+		    </li>
+		    {{/each}}
+	  		</ul>

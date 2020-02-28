@@ -1,0 +1,97 @@
+<div class="page navbar-fixed">
+  <div class="page-content" style="padding-top: 0px;">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="javascript:void(0);" class=" back link">
+            <i class="icon icon-back"></i>
+            <span style="padding-top: 3px">待上门</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="list-block" style="margin: 0 0;">
+      <form id="fm" method="post">
+        <ul style="height:100%;">
+          <!-- Text inputs -->
+          <input type="text" name="id" style="display:none" value="{{model.id}}">
+          <input type="text" name="badws" style="display:none" value="{{model.badw}}">
+          <input type="text" name="phase" style="display:none" value="4">
+          <input type="text" name="jsbh" style="display:none" value="{{model.user.dwbh}}">
+          <li>
+            <div class="item-inner">
+              <i class="PcsTimeIcon"></i>
+              <div class="item-title label">发车日期：</div>
+              <div class="item-input">
+                <input type="date" name="smsyrq" value="{{model.smsyrq}}" placeholder="选择时间">
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <!--<div class="item-media"><i class="icon icon-form-comment"></i></div>-->
+              <div class="item-inner">
+                <i class="PcsCarIcon"></i>
+                <div class="item-title label">出车时间：</div>
+                <div class="item-input">
+                  <input type="time" name="fcsj" value="{{model.fcsj}}" placeholder="输入时间">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsCarCardIcon"></i>
+                <div class="item-title label">车牌号：</div>
+                <div class="item-input">
+                  <input type="text" id="chooseCph" placeholder="选择车牌号" />
+                </div>
+                <input type="text" id="cphfm" name="cph" style="display: none" />
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsmjIcon"></i>
+                <div class="item-title label">民警：</div>
+                <div class="item-input">
+                  <input type="text" name="mjsl" value="{{model.mjsl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsbaIcon"></i>
+                <div class="item-title label">保安：</div>
+                <div class="item-input">
+                  <input type="text" name="basl"  value="{{model.basl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsysIcon"></i>
+                <div class="item-title label">医生：</div>
+                <div class="item-input">
+                  <input type="text" name="yssl" value="{{model.yssl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <p class="buttons-row">
+      <a href="javascript:void(0);" id="tzsm" class="button button-fill button-big button-raised color-blue" style="width:94%;left:3%">通知上门</a>
+    </p>
+  </div>
+</div>

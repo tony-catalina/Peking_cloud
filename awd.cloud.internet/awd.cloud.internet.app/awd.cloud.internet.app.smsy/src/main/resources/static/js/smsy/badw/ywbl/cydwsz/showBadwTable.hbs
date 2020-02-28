@@ -1,0 +1,26 @@
+<ul>
+	{{#if isCommonly}}
+		{{#each data}}
+			<li class="swipeout" id="isCommonly_{{dwbh}}" value="{{dwbh}}" jsmc="{{dwmc}}" type="{{type}}">
+				<div class="swipeout-content item-content">
+					<div class="item-title" style="font-size:1.2rem;color:cornflowerblue">{{dwmc}}</div>
+				</div>
+				<div class="swipeout-actions-right">
+				  <a href="javascript:void(0);" dwbh="{{dwbh}}" option="2" class="setCommonlyUnit bg-red">取消常用</a>
+				</div>
+			</li>
+		{{/each}}
+	{{else}}
+		{{#each data}}
+			<li class="swipeout" id="notCommonly_{{dwbh}}" value="{{dwbh}}" jsmc="{{dwmc}}" type="{{type}}">
+				<div class="swipeout-content item-content">
+					<div class="item-title" style="font-size:1.2rem;color:cornflowerblue">{{dwmc}}</div>
+				</div>
+				<div class="swipeout-actions-right">
+				  <a href="javascript:void(0);" dwbh="{{dwbh}}" option="1" class="setCommonlyUnit bg-blue">设为常用</a>
+				</div>
+			</li>
+		{{/each}}
+	{{/if}}
+</ul>	       
+	       

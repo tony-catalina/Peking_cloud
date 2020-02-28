@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.SmsyDao">
+    <resultMap id="SmsyResultMap" type="awd.cloud.internet.servers.server.entity.SmsyEntity">
+        <result property="id" column="id" javaType="java.lang.String" jdbcType="CHAR"/>
+
+        <result property="badw" column="badw" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="badwdz" column="badwdz" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="gyjs" column="gyjs" javaType="java.lang.String" jdbcType="CHAR"/>
+
+        <result property="xyrxm" column="xyrxm" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="uuid" column="uuid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="phase" column="phase" javaType="java.lang.String" jdbcType="CHAR"/>
+
+        <result property="chyy" column="chyy" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+
+		<result property="fcuuid" column="fcuuid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="syrq" column="syrq" javaType="java.util.Date" jdbcType="DATE"/>
+
+        <result property="jsly" column="jsly" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="state" column="state" javaType="java.lang.String" jdbcType="CHAR"/>
+
+        <result property="creator" column="creator" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="createtime" column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+
+        <result property="updator" column="updator" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="updatetime" column="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        
+        <result property="filenum" column="filenum" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'SmsyResultMap'"/>
+        <bind name="tableName" value="'smsy'"/>
+    </sql>
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.SmsyEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from smsy where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="SmsyResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid" resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+
+    <!-- 根据id 重置上门收押发车信息  不要删！！！ -->
+	<update id="resetFcjlById" parameterType ="String">
+        update smsy set fcuuid=null, phase ='3' where id=#{id} and state="R2"
+    </update>
+    
+    <select id="selectSmsyByFcuuid" parameterType="String" resultType="String">
+    	select phase from smsy where fcuuid=#{fcuuid} and state="R2"
+    </select>
+    
+    <select id="selectSmsyCountByFcuuid" parameterType="String" resultType="int">
+		select count(id) id from smsy where badw = #{badw} 
+		and fcuuid = #{fcuuid} and phase = "4" and state="R2"
+    </select>
+    
+</mapper>

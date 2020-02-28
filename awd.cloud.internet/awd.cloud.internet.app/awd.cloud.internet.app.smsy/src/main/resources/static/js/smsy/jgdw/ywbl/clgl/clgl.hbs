@@ -1,0 +1,35 @@
+<div class="page toolbar-fixed">
+	<div class="page-content" style="padding-top: 0px;">
+		<div class="navbar">
+			<!-- 导航条-->
+			<div class="navbar-inner">
+				<div class="left" style="display: inline-block;width:30%;">
+					<a href="javascript:void(0);" class="link back">
+						<i class="icon icon-back"></i>
+						<span style="padding-top: 3px">车辆管理</span>
+					</a>
+				</div>
+	      		<div>
+					<a href="#" id="addclgl" class="button button-round active">新增车辆</a>
+			    </div>
+			</div>
+		</div>
+		<div class="list-block" style="width:100%; margin:0 0;">
+			<ul>
+				{{#each data}}
+					<li class="swipeout">
+						<div class="swipeout-content item-content">
+							<div class="item-media"><i class="PcsCarCardIcon" style="width:40px"></i></div>
+							<div class="item-inner" style="border-bottom: 1px solid #D3D3D3;">
+								<div class="item-title" >{{cph}}</div>
+							</div>
+						</div>
+						<div class="swipeout-actions-right">
+							<a href="javascript:void(0);" class="bg-red delete" dataid="{{id}}">删除</a>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</div>

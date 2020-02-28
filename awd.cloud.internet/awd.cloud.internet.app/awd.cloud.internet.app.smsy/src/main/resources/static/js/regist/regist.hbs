@@ -1,0 +1,84 @@
+<div class="page navbar-fixed toolbar-fixed" data-page="registe">
+	<div class="navbar">
+		<div class="navbar-inner">
+	      	<a href="javascript:void(0);" class="link back">
+				<i class="icon icon-back"></i>
+				<span style="padding-top: 3px">返回</span>
+			</a>
+	    </div>
+	</div>
+  <div id="maincontent" class="page-content" style="padding-top: 0px">
+    <div class="list-block" style="margin:0px !important;">
+      <form id="registfm">
+      	<input type="text"  name="wxh" style="display: none" value="{{model.userid}}" />
+      	<input type="text"  name="userid" style="display: none" value="{{model.userid}}" />
+        <ul style="padding-top: 60px;height:100%;">
+	        <li style="height: 65px;margin: 10px 0px;">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon registename"></i></div>
+		        <div class="item-inner">
+		          <div class="item-title label">单位名称：</div>
+		          <input type="text" id="choosemc" {{disabled}} placeholder="选择单位名称"   value="{{model.dwbhString}}" />
+		          <input type="text" id="dwbhfm" name="dwbh" style="display: none" value="{{model.dwbh}}" />
+		          <input type="text" id="typefm" name="type" style="display: none" value="{{model.type}}"/>
+		        </div>
+		      </div>
+		    </li>
+	        <li style="height: 65px;margin: 10px 0px;">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon RegisteUN"></i></div>
+		        <div class="item-inner">
+		          <div class="item-title label">姓名：</div>
+		          <input type="text" {{disabled}} name="username" value="{{model.username}}">
+		        </div>
+		      </div>
+		    </li>
+		    <li style="height: 65px;margin: 10px 0px;display:none">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon RegisteXB"></i></div>
+		        <div class="item-inner">
+		          	<div class="item-title label">性别：</div>
+		          	<input type="text" id="choosexb" {{disabled}} placeholder="选择性别"  value="{{model.xbString}}"/>
+		            <input type="text" id="xbfm" name="xb" style="display: none"  value="{{model.xb}}"/>
+		        </div>
+		      </div>
+		    </li>
+	        <li style="height: 65px;margin: 10px 0px;">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon RegisteJH"></i></div>
+		        <div class="item-inner">
+		          <div class="item-title label">警号：</div>
+		          <input type="text" name="jh" {{disabled}} value="{{model.jh}}">
+		        </div>
+		      </div>
+		    </li>
+	        <li style="height: 65px;margin: 10px 0px;">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon RegistePHONE"></i></div>
+		        <div class="item-inner">
+		          <div class="item-title label">联系号码：</div>
+		          <input type="text" name="phone" {{disabled}} value="{{model.mobile}}">
+		        </div>
+		      </div>
+		    </li>
+	        <li style="height: 65px;margin: 10px 0px;">
+		      <div class="item-content">
+		        <div class="item-media"><i class="icon RegistePrisonsiconRoom"></i></div>
+		        <div class="item-inner">
+		          <div class="item-title label">单位地址：</div>
+		          <input type="text" name="address" value="{{model.address}}" >
+		        </div>
+		      </div>
+		    </li>
+        </ul>
+      </form>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <a href="javascript:void(0);" id="registePerson" class="button button-big button-round active" style="width:100%;">注册</a>
+      </div>
+    </div>
+
+  </div>
+</div>

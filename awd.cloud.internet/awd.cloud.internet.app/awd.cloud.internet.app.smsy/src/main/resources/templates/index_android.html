@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>监管e约</title>
+    <!-- Path to Framework7 Library CSS-->
+    <!-- <link rel="stylesheet" href="../lib/css/framework7.material.css">
+    <link rel="stylesheet" href="../lib/css/framework7.material.colors.min.css"> -->
+    <link rel="stylesheet" href="../lib/css/framework7.ios.css">
+    <link rel="stylesheet" href="../lib/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="../lib/css/framework7-icons.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/Login.css">
+    <link rel="stylesheet" href="../css/Pcsindex.css">
+    <link rel="stylesheet" href="../css/jgyy.css">
+  </head>
+  <body>
+  <div class="views">
+    <!-- 主视图（需要有"view-main"样式） -->
+    <div class="view view-main">
+      <!-- 顶部导航栏 -->
+      <!-- 页面容器（Pages container）由于我们使用了固定位置的navbar和toolbar，所以这里添加额外样式（navbar-through和toolbar-through）-->
+      <div class="pages ">
+        <div data-page="login/login" class="page">
+  				<div id="maincontent" class="page-content">
+
+  				</div>
+  			</div>
+      </div>
+    </div>
+    <div class="login-screen">
+      <div class="view">
+	      <div data-page="login/login" class="page">
+	        <div class="login-screen-content" style="height: 100%;">
+	          <div class="login-screen-title">管理员登录</div>
+	          <form id="adminform"> 
+	            <div class="list-block">
+	              <ul>
+	                <li class="item-content">
+	                  <div class="item-inner">
+	                    <div class="item-title label">监所名称</div>
+	                    <div class="item-input">
+	                      <input type="text" id="dwbhfm"  name="jsbh" style="display: none"  />
+	                      <input type="text"  placeholder="监所名称" id="choosemc">
+	                    </div>
+	                  </div>
+	                </li>
+	                <li class="item-content">
+	                  <div class="item-inner">
+	                    <div class="item-title label">密码</div>
+	                    <div class="item-input">
+	                      <input type="password" name="password" placeholder="登录密码">
+	                    </div>
+	                  </div>
+	                </li>
+	              </ul>
+	            </div>
+	            <div class="list-block">
+	              <ul>
+	                <li><a href="#" class="button button-big button-round button-fill button-raised" id="adminlogin" style="width:95%;left:3%">登录</a></li>
+	              </ul>
+	              <div class="list-block-label">
+	                <p><a href="#" class="close-login-screen">关闭管理员登录页面</a></p>
+	              </div>
+	            </div>
+	          </form>
+	        </div>
+	      </div>
+      </div>
+    </div>
+  </div>
+    <div class="popup popup-selectBadw">
+  	<p><a href="#"  class="button button-round button-fill close-popup" >关闭</a></p>
+    <div class="searchbar">
+        <div class="searchbar-input">
+            <input type="search" placeholder="请输入单位名称...">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a href="#" class="searchbar-cancel">取消</a>
+    </div>
+    <div class="searchbar-overlay"></div>
+    <div class="page-content">
+        <div class="content-block searchbar-not-found">
+             未搜索到结果...
+        </div>
+        <div class="list-block list-block-search searchbar-found" style="margin-top: 0px;">
+            <ul id="selectbadw">
+      		</ul>
+        </div>
+    </div>
+  </div>
+    <div class="popup popup-selectCph">
+  	<p><a href="#"  class="button button-raised button-fill color-blue close-popup">关闭</a></p>
+    <div class="searchbar">
+        <div class="searchbar-input">
+            <input type="search" placeholder="请输入车牌号...">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a href="#" class="searchbar-cancel">取消</a>
+    </div>
+    <div class="searchbar-overlay"></div>
+    <div class="page-content">
+        <div class="content-block searchbar-not-found">
+             未搜索到结果...
+        </div>
+        <div class="list-block list-block-search searchbar-found" style="margin-top: 0px;">
+            <ul id="selectcph">
+      		</ul>
+        </div>
+    </div>
+  </div>
+  <div class="popup popup-Registerslb">
+  	<p><a href="#"  class="button button-raised button-fill color-blue close-popup">关闭</a></p>
+    <div class="list-block" >      
+      <ul id="select">
+      </ul>
+    </div>
+  </div>
+  <div class="popup popup-services">
+  	<p><a href="#"  class="button button-raised button-fill color-blue close-popup">关闭</a></p>
+    <div class="content-block">      
+      <div id="ryxx">
+
+  	  </div>
+    </div>
+  </div> 
+
+  <script type="text/javascript" src="lib/framework7.min.js"></script>
+  <script data-main="app" src="lib/require.js"></script>
+  </body>

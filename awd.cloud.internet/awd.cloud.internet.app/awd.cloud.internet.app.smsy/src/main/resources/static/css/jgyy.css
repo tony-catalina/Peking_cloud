@@ -1,0 +1,68 @@
+.login-bg {
+    background-image:url("../img/jgyy_bg.jpg");
+    background-size:100% 100%;
+}
+
+.login-icon{
+    background-image:url("../img/police.jpg");
+    background-size:100% 100%;
+    position: relative;
+    left: 33%;
+    top: 16%;
+    height: 100px;
+    width: 30%;
+}
+
+.ordericon{
+    background-image:url("../img/ordericon.png");
+    width:40px;
+    height:50px;
+}
+
+.recordicon{
+    background-image:url("../img/recordicon.png");
+    width:40px;
+    height:50px;
+}
+
+.informicon{
+    background-image:url("../img/informicon.png");
+    width:40px;
+    height:50px;
+}
+
+.ordertimeicon{
+    background-image:url("../img/ordertime.png");
+    width:40px;
+    height:50px;
+}
+
+.Prisonsicon{
+    background-image:url("../img/Policeicon.png");
+    width:40px;
+    height:50px;
+}
+
+.PrisonsiconRoom{
+    background-image:url("../img/PrisonsiconRoom.png");
+    width:40px;
+    height:50px;
+}
+
+.Phone{
+    background-image:url("../img/phone.png");
+    width:40px;
+    height:50px;
+}
+
+.zjhicon{
+    background-image:url("../img/zjh.png");
+    width:40px;
+    height:50px;
+}
+
+.gsicon{
+    background-image:url("../img/gsmc.png");
+    width:40px;
+    height:50px;
+}

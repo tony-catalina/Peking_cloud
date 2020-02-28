@@ -1,0 +1,42 @@
+<div class="list-block accordion-list" style="width:100%; margin:0 0;height:100%;">
+	<ul>
+		{{#each data}}
+		<li class="accordion-item">
+			<a href="#" class="item-content item-link">
+			  <div class="item-inner">
+			    <div class="item-title">{{@key}}</div>
+			  </div>
+			</a>
+			<div class="accordion-item-content">
+				<div class="content-block">
+					<div class="list-block">
+						<ul>
+						{{#each this}}
+							<li class="accordion-item first-item">
+								<a href="#" class="swipeout-content item-content item-link" >
+					                <div class="item-inner">
+										<input type="hidden" class="fcjlid" value="{{id}}">
+										<input type="hidden" class="fcuuid" value="{{fcuuid}}">
+										<div class="item-title">
+											<div>
+												<font style="font-size:14px">发车时间：{{fcsj}}</font>
+											</div>
+											<div>
+												<span style="font-size:14px;">车牌：{{cph}}</span>
+											</div>
+										</div>
+					                </div>
+					            </a>
+								<div class="accordion-item-content smsy-content_{{id}}">
+								</div>
+							</li>
+						{{/each}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+

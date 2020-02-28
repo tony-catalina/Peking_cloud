@@ -1,0 +1,42 @@
+<div class="list-block accordion-list" style="width:100%; margin:0 0;">
+	<ul>
+		{{#each data}}
+			{{#is_ywcjl fczt}}
+			<li class="accordion-item first-item">
+			{{else}}
+			<li class="swipeout accordion-item first-item">
+			{{/is_ywcjl}}
+	            <a href="#" class="swipeout-content item-content item-link" >
+	                <div class="item-inner">
+						<input type="hidden" class="fcjlid" value="{{id}}">
+						<input type="hidden" class="fcuuid" value="{{fcuuid}}">
+						<div class="item-title">
+							<div>
+								<font style="font-size:14px">发车时间：{{fcsj}}</font>
+							</div>
+							<div>
+								<span style="font-size:14px;">车牌：{{cph}}</span>
+							</div>
+						</div>
+	                </div>
+	            </a>
+			
+				{{#equal fczt}}
+				<div class="swipeout-actions-right" style="height:60px;">
+					<a href="javascript:void(0);" class="bg-green delay" dataid="{{id}}" fcuuid="{{fcuuid}}" fczt="{{fczt}}">延迟发车</a>
+					<a href="javascript:void(0);" class="bg-red delete" dataid="{{id}}" fcuuid="{{fcuuid}}" fczt="{{fczt}}">取消发车</a>
+				</div>
+				{{else}}
+				<div class="swipeout-actions-right" style="height:60px;">
+					<a href="javascript:void(0);" class="bg-green replay" 
+						dataid="{{id}}" cph="{{cph}}" fcsj="{{fcsj}}" 
+						mjsl="{{mjsl}}" basl="{{basl}}" yssl="{{yssl}}" >重新发车</a>
+					<a href="javascript:void(0);" class="bg-red delete" dataid="{{id}}" fcuuid="{{fcuuid}}" fczt="{{fczt}}">取消发车</a>
+				</div>
+				{{/equal}}
+				<div class="accordion-item-content smsy-content_{{id}}">
+				</div>
+			</li>
+		{{/each}}
+	</ul>
+</div>

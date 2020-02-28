@@ -1,0 +1,48 @@
+          <div class="content-block">
+            <div class="list-block">
+              <ul>
+                {{#each data}}
+			      <li class="accordion-item badw-list">
+			        <a href="#" class="item-content item-link">
+			          <div class="item-inner">
+			            <div class="item-title">{{@key}}</div>
+			          </div>
+			        </a>
+			        <div class="accordion-item-content">
+			          <div class="content-block">
+			            <div class="list-block">
+			              <ul>
+			                {{#each this}}
+			                	<div class="item-content">
+									<div class="item-inner" style="font-size: 14px;">地址：{{@key}}</div>
+								</div>
+								{{#each this}}
+								<li class="/*swipeout*/ single-person">
+									<div class="/*swipeout-content*/ item-content single-person-content">
+										<div class="item-media"><i class="f7-icons color-blue">person</i></div>
+										<div class="item-inner">
+											<div class="item-title rydetail" uuid="{{uuid}}">{{xyrxm}}({{filenum}})</div>
+											{{#is_showbutton phase}}
+											<div class="item-after" style="font-size:10px;">{{phaseString}}</div>
+											{{else}}
+											<div class="item-after" style="font-size:10px;margin-right: -30px;">
+												<a href="#" class="button button-round active color-red jgdw_qxsy" dataid="{{id}}" fcuuid="{{fcuuid}}" badw="{{badw}}">取消上门</a>
+											</div>
+											{{/is_showbutton}}
+										</div>
+									</div>
+									<!-- <div class="swipeout-actions-right single-person-actions">
+										<a href="javascript:void(0);" class="bg-red jgdw_qxsy" dataid="{{id}}" fcuuid="{{fcuuid}}"><p style="font-size:16px;">取消上门</p></a>
+									</div> -->
+								</li>
+								{{/each}}
+							{{/each}}
+			              </ul>
+			            </div>
+			          </div>
+			        </div>
+			      </li>
+			    {{/each}}
+              </ul>
+            </div>
+          </div>

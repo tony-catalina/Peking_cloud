@@ -1,0 +1,50 @@
+<div class="page toolbar-fixed">
+	<div class="page-content" style="padding-top: 0px;">
+		<div class="navbar">
+			<!-- 导航条-->
+			<div class="navbar-inner">
+					<a href="javascript:void(0);" class="link back">
+						<i class="icon icon-back"></i>
+						<span style="padding-top: 3px">历史信息</span>
+					</a>
+			</div>
+		</div>
+		<div class="list-block accordion-list" style="width:100%; margin:0 0;">
+			<ul>
+				{{#each data}}
+					<li class="accordion-item"><a href="#" class="item-content item-link">
+							<div class="item-inner">
+								<div class="item-title">{{@key}}</div>
+							</div>
+						</a>
+						<div class="accordion-item-content">
+							<div class="content-block">
+								<div class="list-block">
+									<ul>
+										{{#each this}}
+											<li class="swipeout">
+												<div class="swipeout-content item-content">
+													<div class="item-media"><i class="f7-icons color-blue">person</i></div>
+													<div class="item-inner">
+														<div class="item-title" uuid={{uuid}}>{{xyrxm}}({{filenum}})</div>
+														<div class="item-after" style="font-size:10px;">{{updatetime}}</div>
+														<div class="item-after" style="font-size:10px;">{{phaseString}}</div>
+													</div>
+												</div>
+												{{#if chyy}}
+												<div class="swipeout-actions-right">
+													<a href="javascript:void(0);" class="bg-red chyy" chyy="{{chyy}}" ><p style="font-size:10px;"></p>撤销原因</a>
+												</div>
+												{{/if}}
+											</li>
+										{{/each}}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</div>

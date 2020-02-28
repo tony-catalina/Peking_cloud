@@ -1,0 +1,50 @@
+<div class="page  toolbar-fixed" >
+	<div class="" style="margin: 0px; padding: 0px;">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left" style="display: inline-block">
+					<a href="#" class="back link">
+						<i class="icon icon-back"></i>
+						<span style="padding-top: 3px">审核未通过人员</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="list-block accordion-list" style="margin: 0px; padding: 0px;">
+			<ul >
+				{{#each data}}
+				<li class="accordion-item"><a href="#" class="item-content item-link">
+						<div class="item-inner">
+							<div class="item-title">{{@key}}</div>
+						</div>
+					</a>
+					<div class="accordion-item-content">
+						<div class="content-block">
+							<div class="list-block">
+								<ul>
+									{{#each this}}
+									<li class="swipeout">
+										<div class="swipeout-content item-content">
+											<div class="item-media"><i class="f7-icons color-blue">person</i></div>
+											<div class="item-inner">
+												<div class="item-title" uuid="{{uuid}}">{{xyrxm}}({{filenum}})</div>
+												<div class="item-after" style="font-size:10px;">{{updatetime}}</div>
+											</div>
+										</div>
+										<div class="swipeout-actions-right">
+											<a href="#" class="action1 bg-red" jsly="{{jsly}}">拒收原因</a>
+										</div>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+
+	</div>
+
+</div>

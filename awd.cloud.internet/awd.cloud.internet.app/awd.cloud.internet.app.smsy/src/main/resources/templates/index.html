@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <title>监管e约</title>
+	    <!-- Path to Framework7 Library CSS-->
+	    <link rel="stylesheet" href="../lib/css/framework7.ios.css">
+	    <link rel="stylesheet" href="../lib/css/framework7.ios.colors.min.css">
+	    <link rel="stylesheet" href="../lib/css/framework7-icons.css">
+	    <!-- Path to your custom app styles-->
+	    <link rel="stylesheet" href="../css/my-app.css">
+	    <link rel="stylesheet" href="../css/Login.css">
+	    <link rel="stylesheet" href="../css/Pcsindex.css">
+	    <link rel="stylesheet" href="../css/jgyy.css">
+	</head>
+	<body>
+		<div class="views">
+	    <!-- 主视图（需要有"view-main"样式） -->
+		    <div class="view view-main">
+				<!-- 顶部导航栏 -->
+				<!-- 页面容器（Pages container）由于我们使用了固定位置的navbar和toolbar，所以这里添加额外样式（navbar-through和toolbar-through）-->
+				<div class="pages">
+				  <div data-page="login/login" class="page">
+							<div id="maincontent" class="page-content" style="padding-top: 0px;">
+					
+							</div>
+						</div>
+				</div>
+	    </div>
+		</div>
+  
+		<div class="popup popup-selectBadw">
+		</div>
+		<div class="popup popup-selectCph">
+		</div>
+		<div class="popup popup-interface">
+		</div>
+		<div class="popup popup-addressInput" style="height: 220px;width:94%;top: 30%;left:3%;border-radius:7px;">
+		</div>
+		<div class="popup popup-Registerslb">
+	  		<p><a href="#"  class="button button-round button-fill close-popup">关闭</a></p>
+	    <div class="list-block" style="margin-top: 0px;">   
+			<ul id="select">
+			</ul>
+		</div>
+	</div>
+	<div class="popup popup-services">
+		<p><a href="#"  class="button button-round button-fill close-popup">关闭</a></p>
+		<div class="content-block">      
+			<div id="ryxx">
+	
+			</div>
+    	</div>
+	</div>  
+	<script type="text/javascript" src="lib/framework7.js"></script>
+	<script data-main="app" src="lib/require.js"></script>
+	</body>
+</html>

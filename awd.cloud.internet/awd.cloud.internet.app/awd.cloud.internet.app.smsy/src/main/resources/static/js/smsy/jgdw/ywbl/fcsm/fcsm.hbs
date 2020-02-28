@@ -1,0 +1,66 @@
+<div class="page  toolbar-fixed" >
+	<div class="page-content" style="margin: 0px; padding: 0px;">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left" style="display: inline-block">
+					<a href="#" class="back link">
+						<i class="icon icon-back"></i>
+						<span style="padding-top: 3px">发车上门</span>
+					</a>
+				</div>
+				<div>
+					<a href="#" id="addTzsm" class="button button-round active">通知上门</a>
+		        </div>
+			</div>
+		</div>
+		<div class="list-block /*accordion-list*/" style="margin: 0px; padding: 0px;">
+			  <ul>
+    {{#each data}}
+      <li class="accordion-item">
+        <a href="#" class="item-content item-link">
+          <div class="item-inner">
+            <div class="item-title">{{@key}}</div>
+          </div>
+        </a>
+        <div class="accordion-item-content">
+          <div class="content-block">
+            <div class="list-block">
+              <ul>
+                {{#each this}}
+                  <li class="swipeout">
+                    <div class="swipeout-content item-content" style="padding-left: 0px;">
+	                    <label class="label-checkbox item-inner" style="width:50px;padding-left:10px;padding-right:10px">
+					        <input type="checkbox" name="my-checkbox" value="{{id}}" badw="{{badw}}">
+					        <div class="item-media">
+					          <i class="icon icon-form-checkbox"></i>
+					        </div>
+					      </label>
+                      <div class="item-media"><i class="f7-icons color-blue">person</i></div>
+                      <div class="item-inner">
+                        <div class="item-title" uuid={{uuid}}>{{xyrxm}}({{filenum}})</div>
+                        <div class="item-after" style="font-size:10px;">{{updatetime}}</div>
+                      </div>
+                    </div>
+                    <div class="swipeout-actions-right">
+                      <!-- <a href="javascript:void(0);" dataid={{id}} class="action1 bg-blue">通知上门</a> -->
+                      <a href="javascript:void(0);" dataid={{id}} class="action2 bg-red">文书有误</a>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+

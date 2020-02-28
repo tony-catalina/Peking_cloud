@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.AdminDao">
+    <resultMap id="AdminResultMap" type="awd.cloud.internet.servers.server.entity.AdminEntity">
+		<result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+		<result property="jsbh" column="jsbh" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+		<result property="jsmc" column="jsmc" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+		<result property="password" column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'AdminResultMap'"/>
+        <bind name="tableName" value="'admin'"/>
+        <bind name="resultJbxxMapId" value="'JbxxInfoResultMap'"/>
+        <bind name="jbxxName" value="'JBXX'"/>
+    </sql>
+    <select id="jbxxlist"  resultType="java.util.HashMap" >
+    <include refid="config"/>
+    <trim>
+        select jbxx.snbh as snbh,jbxx.XM as xm,jbxx.JSH as jsh,
+        <include refid="BasicMapper.buildSelectField"/>
+        from  {tableName} admin ,jbxx jbxx
+        <where>
+            <include refid="BasicMapper.buildWhere"/>
+            <include refid="JbxxMapper.buildJbxxWhere"/>
+            and admin.rybh=jbxx.rybh
+        </where>
+        <include refid="BasicMapper.buildSortField"/>
+    </trim>
+    </select>
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.AdminEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from admin where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+    
+    <delete id="deleteTable">
+        delete from admin 
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="AdminResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid"  resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+    <select id="jbxxcount"  resultType="int">
+    <include refid="config"/>
+    <trim>
+        select count(0) as total
+        from  admin admin ,jbxx jbxx
+        <where>
+            <include refid="BasicMapper.buildWhere"/>
+            <include refid="JbxxMapper.buildJbxxWhere"/>
+            and admin.rybh=jbxx.rybh
+        </where>
+        <include refid="BasicMapper.buildSortField"/>
+    </trim>
+    </select>
+
+        </mapper>

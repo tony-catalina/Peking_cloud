@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="iframe-h">
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>网站后台管理模版</title>
+<link rel="stylesheet" type="text/css"	href="../../static/admin/layui-v2.4.5/css/layui.css" />
+<link rel="stylesheet" type="text/css"	href="../../static/admin/css/admin.css" />
+</head>
+
+<body>
+	<div class="wrap-container clearfix">
+		<div class="column-content-detail">
+			<div class="layui-form">
+				<div class="layui-form-item">
+					<!-- <div class="layui-inline tool-btn">
+						<button class="layui-btn layui-btn-small layui-btn-danger delBtn"
+							data-url="article-add.html">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+						<button
+							class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs"
+							data-url="article-add.html">
+							<i class="iconfont">&#xe656;</i>
+						</button>
+					</div> -->
+					<div class="layui-inline tool-btn ">
+								<button type="button" id ="query" class="layui-btn layui-btn-normal">文件查看</button>
+							</div>
+					<div class="layui-inline">
+						<input type="text" name="title" id="title"
+							placeholder="请输入姓名" autocomplete="off" class="layui-input">
+					</div>
+					<div class="layui-inline">
+						<select name="states" lay-filter="status" id="pash">
+							<option value="">请选择一个状态</option>
+							<option value="1">申请中</option>
+							<option value="2">审批通过</option>
+							<option value="3">审批退回</option>
+							<option value="4">主动撤销</option>
+							<option value="5">确认收押</option>
+						</select>
+					</div>
+					<button class="layui-btn layui-btn-normal" data-type="reload">搜索</button>
+				</div>
+			</div>
+			<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+		</div>
+	</div>
+	
+	
+	<div class="layui-row" id="popUpdateTest" style="display: none;">
+		<div class="layui-col-md10" id = "GwSign">
+		</div>
+	</div>
+	<script src="../../static/admin/layui-v2.4.5/layui.js" type="text/javascript"		charset="utf-8"></script>
+ 
+	<!-- <script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>-->	
+	<script>
+	layui.use(['table','form'], function(){
+	  var table = layui.table;
+	  var form = layui.form;
+		var table = layui.table,
+		$ = layui.jquery
+	  table.render({
+	    elem: '#LAY_table_user'
+	    ,id:'isText'
+	    ,url:'/smsy/syquery/'
+	    ,toolbar: true
+	    ,title: '用户数据表'
+	    ,cols: [[
+	      {type: 'checkbox', fixed: 'left'}
+	      ,{field:'uuid', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+	      ,{field:'xyrxm', title:'收押人姓名', width:120}
+	      ,{field:'phaseString', title:'阶段', width:120}
+	      ,{field:'cph', title:'车牌号',hide:true, width:120}
+	      ,{field:'smsyrq', title:'上门收押时间', width:160, sort: true}
+	      ,{field:'mjsl', title:'民警数量', width:100}
+	      ,{field:'basl', title:'保安数量', width:100,}
+	      ,{field:'badw', title:'办案单位', unresize: true}
+	      ,{field:'gyjs', title:'关押监所', unresize: true}
+	      ,{field:'chyy', title:'撤回原因', hide:true,width:80, sort: true}
+	      ,{field:'jsly', title:'拒收理由', hide:true,width:120}
+	      ,{field:'fcsj', title:'发车时间', hide:true,width:100, sort: true}
+	      ,{field:'syrq', title:'收押日期',hide:true, width:120}
+	      //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+	    ]]
+	    ,page: true
+	    ,height:570
+	  });
+	  
+	  //查询
+
+	  var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#title');
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                            xyrxm: demoReload.val()
+                    }
+                });
+            }
+        };
+
+	  
+	  $('.layui-form-item .layui-btn').on('click', function(){
+          search = $('#title').val();
+          phase = $('#pash').val();
+          table.reload('isText',{
+        	  where:{
+        		  xyrxm:search,
+        		  phase:phase
+        	  }
+          	  ,page:{
+          		  curr:1
+          	  }
+          })
+      });
+	  
+	  
+	  //头工具栏事件
+	  table.on('toolbar(test)', function(obj){
+	    var checkStatus = table.checkStatus(obj.config.id);
+	    switch(obj.event){
+	      case 'getCheckData':
+	        var data = checkStatus.data;
+	        layer.alert(JSON.stringify(data));
+	      break;
+	      case 'getCheckLength':
+	        var data = checkStatus.data;
+	        layer.msg('选中了：'+ data.length + ' 个');
+	      break;
+	      case 'isAll':
+	        layer.msg(checkStatus.isAll ? '全选': '未全选');
+	      break;
+	    };
+	  });
+	  $('#query').on('click', function(obj) {
+			var checkStatus = table.checkStatus('isText');
+			var data = checkStatus.data;
+			if(data!=""){
+			layer.open({
+                 type: 1,
+                 title: "文件查看",
+                 area: ['90%', '80%'],
+                 content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
+             });
+			 setFormValue(obj,data);
+			}else{
+				 layer.msg("请选查看人员", {icon: 6});
+			}
+		});
+	  
+	  //监听行工具事件
+	  table.on('tool(test)', function(obj){
+	    var data = obj.data;
+	    //console.log(obj)
+	    if(obj.event === 'del'){
+	      layer.confirm('真的删除行么', function(index){
+	        obj.del();
+	        layer.close(index);
+	      });
+	    } else if(obj.event === 'edit'){
+	      layer.prompt({
+	        formType: 2
+	        ,value: data.email
+	      }, function(value, index){
+	        obj.update({
+	          email: value
+	        });
+	        layer.close(index);
+	      });
+	    }
+	  });
+	  
+	  
+	  function setFormValue(obj,data){
+		  var uuid = data[0].uuid;
+              $.ajax({
+                  url:"/file/filequery",
+                  data:{
+               	   "uuid":uuid,
+                  },
+                  success:function (result) {
+                	  console.log(result.data);
+                	  for(var i = 0 ; i < result.data.length ; i++){
+                          url = result.data[i].filepath;
+                          console.log(url);
+                          Num = i;
+                          $("#GwSign").after(
+                              '<div class="layui-input-inline" style="padding-right:2%">' +
+                              ' <div class="layui-item"> ' +
+                              '<div class="layui-inline">' +
+                              '<img src=' +url + ' style="width:160px;height:80px;">' +
+                              '<br>'+
+//                              '<button type="button" class="layui-btn layui-btn-normal" style="margin:3% 0% 4% 34%;" onclick="downLoadimg(event)"  value='+url+'  id="a'+Num+'">下载</button>'+
+                              '</div> ' +
+                              '</div>' +
+                              '</div>'
+                          )};
+                	  
+                  }
+              })
+              return false
+
+      }
+	});
+	
+	</script>
+</body>
+
+</html>

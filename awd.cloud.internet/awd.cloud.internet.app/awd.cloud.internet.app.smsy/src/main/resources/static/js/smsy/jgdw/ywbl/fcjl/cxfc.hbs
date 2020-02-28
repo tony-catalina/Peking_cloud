@@ -1,0 +1,100 @@
+<div class="page navbar-fixed">
+  <div class="page-content" style="padding-top: 0px;">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <span style="padding-top: 3px">重新发车</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-block" style="margin: 0 0;">
+      <form id="fcfm" method="post">
+        <ul style="height:100%;">
+          <!-- Text inputs -->
+          <input type="text" name="id" style="display:none" value="{{model.id}}">
+          <input type="text" name="fczt" style="display:none" value="1">
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsCarCardIcon"></i>
+                <div class="item-title label">车牌号：</div>
+                <div class="item-input">
+                  <input type="text" id="cphfm" value="{{model.cph}}" readonly/>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-inner">
+              <i class="PcsTimeIcon"></i>
+              <div class="item-title label" style="left:3%;">发车日期：</div>
+              <div class="item-input">
+                <input type="date" name="smsyrq" placeholder="选择时间">
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <!--<div class="item-media"><i class="icon icon-form-comment"></i></div>-->
+              <div class="item-inner">
+                <i class="PcsCarIcon"></i>
+                <div class="item-title label">出车时间：</div>
+                <div class="item-input">
+                  <input type="time" name="fcsj" placeholder="输入时间">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsmjIcon"></i>
+                <div class="item-title label">民警：</div>
+                <div class="item-input">
+                  <input type="text" name="mjsl" value="{{model.mjsl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsbaIcon"></i>
+                <div class="item-title label">保安：</div>
+                <div class="item-input">
+                  <input type="text" name="basl"  value="{{model.basl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsysIcon"></i>
+                <div class="item-title label">医生：</div>
+                <div class="item-input">
+                  <input type="text" name="yssl" value="{{model.yssl}}" placeholder="人数">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <!-- <p class="buttons-row" style="width:94%;">
+		<a href="#" class="addressSubmit button button-fill color-green button-round" style="left:3%;place-content: center;display: inline-grid;">确认</a>
+		<a href="#" class="addressCancel button button-fill color-red button-round" style="left:3%;place-content: center;display: inline-grid;">取消</a>
+	</p> -->
+    <div class="row" style="width:90%;margin-top:20px;">
+		<div class="col-50">
+			<a href="#" style="left:10%" id="submit" class="button button-fill button active button-raised color-blue">确定</a>
+		</div>
+		<div class="col-50">
+		 	<a href="#" style="left:10%" id="cancel" class="button button-fill button active button-raised color-red">取消</a>
+		</div>
+	</div>  
+  </div>
+</div>

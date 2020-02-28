@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: ${hostname:awd-mis-internet-smsy-web}
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+awd:
+  mis:
+    name: 上门收押应用
+    version: 1.0.0
+  image:
+    cache: ${image_cache:f:/user/images/}
+  ftp: 
+    ftphost: ${ftphost:http://192.168.4.50:9999}
+  smsy:
+    logName: ${smsy_logName:smsy_operator_log.log}
+    logPath: ${smsy_logPath:/etc/log_audit/operator_logs/}
+    #logPath: c:/log_audit/operator_logs/
+swagger2:
+  package:  awd.mis.servers
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      #defaultZone: ${eureka.serviceUrl:http://192.168.4.107:3001/eureka/,http://192.168.4.107:3002/eureka/,http://192.168.4.107:3003/eureka/}
+      defaultZone: ${eureka.serviceUrl:http://127.0.0.1:3001/eureka/}
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: ${hystrixtime:60000}
+
+logging:
+  level:
+    root: ${loglevel:INFO}
+  file: smsy_log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+server:
+  max-http-header-size: 10000000
+  port: ${port:8086}
+  tomcat:
+    max-http-post-size: 4048576
+  session:
+    timeout: ${timeout:36000000}
+    cookie:
+      name: session_internet_smsy
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain

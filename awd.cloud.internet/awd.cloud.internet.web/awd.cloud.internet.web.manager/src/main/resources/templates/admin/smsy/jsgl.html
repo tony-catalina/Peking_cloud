@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="iframe-h">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>网站后台管理模版</title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui-v2.4.5/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
+	</head>
+
+	<body>
+		<div class="wrap-container clearfix">
+				<div class="column-content-detail">
+					<div class="layui-form">
+						<div class="layui-form-item">
+							<div class="layui-inline tool-btn ">
+								<button type="button" id ="addUser" class="layui-btn layui-btn-normal">增加</button>
+							    <button type="button" id ="updateUser" class="layui-btn layui-btn-normal">编辑</button>
+							   <!--  <button type="button" id = "deleteUser" class="layui-btn layui-btn-danger">删除</button> -->
+							</div>
+							<div class="layui-inline">
+								<input type="text" name="title" id="title" placeholder="请输入单位名称" autocomplete="off" class="layui-input">
+							</div>
+							<div class="layui-inline">
+								<input type="text" name="bh" id="bh" placeholder="请输入单位编号 " autocomplete="off" class="layui-input">
+							</div>
+							<button class="layui-btn layui-btn-normal" lay-submit="search" id="search">搜索</button>
+						</div>
+					</div>
+					<table class="layui-hide" id="table-list"></table>
+				</div>
+		</div>
+		
+		<div class="layui-row" id="popUpdateTest" style="display: none;">
+		<div class="layui-col-md10">
+			<form class="layui-form layui-from-pane"
+				style="margin-top: 20px" id="updateform">
+				<div class="layui-form-item" style="width: 60%;margin: auto;padding-bottom: 15px;">
+					<label class="layui-form-label">单位编号：</label>
+					<div class="layui-input-block">
+						<input type="text" name="dwbh" id="dwbh" required
+							lay-verify="required" autocomplete="off" placeholder="请输入单位编号"
+							class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" style="width: 60%;margin: auto;" style="display:none;">
+					<div class="layui-input-block" style="display:none;">
+						<input type="text" name="id" id="id"
+							 autocomplete="off" 
+							class="layui-input" style="display:none;">
+					</div>
+				</div>
+				<div class="layui-form-item" style="width: 60%;margin: auto;padding-bottom: 15px;">
+					<label class="layui-form-label">单位名称：</label>
+					<div class="layui-input-block">
+						<input type="text" name="dwmc" id="dwmc" required
+							lay-verify="required" autocomplete="off" placeholder="请输入单位名称"
+							class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" style="width: 60%;margin: auto;padding-bottom: 15px;">
+					<label class="layui-form-label">单位地址：</label>
+					<div class="layui-input-block">
+					<input type="text" name="dwdz" id="dwdz" required
+							lay-verify="required" autocomplete="off" placeholder="请输入单位地址"
+							class="layui-input">
+					</div>
+				</div>
+				<!-- <div class="layui-form-item" style="width: 60%;margin: auto;padding-bottom: 15px;">
+					<label class="layui-form-label">单位类型：</label>
+					<div class="layui-input-block">
+						<select name="dwlx" lay-filter="eqptType" id="dwlx">
+							<option value="0">派出所</option>
+							<option value="1" selected="">看守所</option>
+						</select>
+					</div>
+				</div> -->
+				<div class="layui-form-item" style="margin-left: 30%;margin-top: 10%">
+					<div class="layui-input-block">
+						<button class="layui-btn  " lay-filter="demo11" lay-submit="">确认修改</button>
+						<button type="reset" style="margin-left:81px" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+		<script src="../../static/admin/layui-v2.4.5/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		layui.use(['table','form'], function() {
+			var form = layui.form;
+			var table = layui.table,
+			$ = layui.jquery
+		  table.render({
+		    elem: '#table-list'
+		    ,url:'/dw/userquery/'
+		    ,id:'isText'
+		    ,title: '用户数据表'
+		    ,where : {
+				dwlx:"1",
+			}
+		    ,cols: [[
+		      {type: 'checkbox', fixed: 'left'}
+		      ,{field:'dwbh', title:'单位编号', width:150, fixed: 'left', unresize: true}
+		      ,{field:'dwmc', title:'单位名称'}
+		      ,{field:'dwdz', title:'单位地址'}
+		    ]]
+		    ,page: true
+		    ,height : 570
+		  });
+		  
+		  //头工具栏事件
+		  table.on('toolbar(test)', function(obj){
+		    var checkStatus = table.checkStatus(obj.config.id);
+		    switch(obj.event){
+		      case 'getCheckData':
+		        var data = checkStatus.data;
+		        layer.alert(JSON.stringify(data));
+		      break;
+		      case 'getCheckLength':
+		        var data = checkStatus.data;
+		        layer.msg('选中了：'+ data.length + ' 个');
+		      break;
+		      case 'isAll':
+		        layer.msg(checkStatus.isAll ? '全选': '未全选');
+		      break;
+		    };
+		  });
+		  
+		  //监听行工具事件
+		  table.on('tool(test)', function(obj){
+		    var data = obj.data;
+		    //console.log(obj)
+		    if(obj.event === 'del'){
+		      layer.confirm('真的删除行么', function(index){
+		        obj.del();
+		        layer.close(index);
+		      });
+		    } else if(obj.event === 'edit'){
+		      layer.prompt({
+		        formType: 2
+		        ,value: data.email
+		      }, function(value, index){
+		        obj.update({
+		          email: value
+		        });
+		        layer.close(index);
+		      });
+		    }
+		  });
+		  
+		//查询
+			$('#search').on('click', function() {
+				username = $('#title').val();
+				bh = $('#bh').val();
+				table.reload('isText', {
+					where : {
+						dwmc : username,
+						bh:bh,
+						dwlx:"1",
+					},
+					page : {
+						curr : 1
+					}
+				})
+			});
+		
+			//新增
+			$('#addUser').on('click', function(obj) {
+				var data = obj.data;
+				console.log(data);
+				layer.open({
+	                   type: 1,
+	                   title: "新增监所",
+	                   area: ['70%', '60%'],
+	                   content: $("#popUpdateTest")//引用的弹出层的页面层的方式加载修改界面表单
+	               });
+				 setFormValue(obj,data);
+			});
+		
+			$('#updateUser').on('click', function(obj) {
+				var checkStatus = table.checkStatus('isText');
+				var data = checkStatus.data;
+				console.log(data[0].id);
+				if(data!=""){
+				layer.open({
+	                   type: 1,
+	                   title: "修改监所",
+	                   area: ['70%', '60%'],
+	                   content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
+	                   success : function() {
+							 $("#dwmc").val(data[0].dwmc);
+							 $("#dwbh").val(data[0].dwbh);
+							 $("#dwdz").val(data[0].dwdz);
+							 $("#id").val(data[0].id);
+						 }
+	               });
+				 setFormValue(obj,data);
+				}else{
+					 layer.msg("请选中修改数据", {icon: 6});
+				}
+			});
+			
+			
+			 function setFormValue(obj,data){
+				 form.on('submit(demo11)', function(massage) {
+					 console.log(massage.field);
+						  if(massage.field.id==""){
+			        		   url="/dw/saveUnit"
+			        	   }else{
+			        		   url="/dw/updateUnit"
+			        	   }
+		               $.ajax({
+		                   url:url,
+		                   type:'POST',
+		                   data:{
+		                	   "dwmc":massage.field.dwmc,
+		                	   "dwbh":massage.field.dwbh,
+		                	   "dwdz":massage.field.dwdz,
+		                	   "id":massage.field.id,
+		                	   "type":"1"
+		                   },
+		                   success:function (result) {
+		                       var returnCode = result.success;//取得返回数据（Sting类型的字符串）的信息进行取值判断
+		                       if(returnCode==true){
+		                           layer.closeAll('loading');
+		                           layer.load(2);
+		                           layer.msg(result.result, {icon: 6});
+		                           setTimeout(function(){
+		                        	   table.reload('isText', {
+		               					where : {
+		               						dwlx:"1",
+		               					},
+		               					page : {
+		               						curr : 1
+		               					}
+		               				}) //修改成功修改表格数据不进行跳转
+		                                layer.closeAll();//关闭所有的弹出层
+		                           }, 1000);
+		                           layer.closeAll();
+		                           $("#popUpdateTest")[0].reset();
+		                           layui.form.render();
+		                       }else{
+		                           layer.msg("失败", {icon: 5});
+		                       }
+		                   }
+		               })
+		               return false
+		           })
+
+		       }
+			  
+		  
+		});
+		</script>
+	</body>
+
+</html>

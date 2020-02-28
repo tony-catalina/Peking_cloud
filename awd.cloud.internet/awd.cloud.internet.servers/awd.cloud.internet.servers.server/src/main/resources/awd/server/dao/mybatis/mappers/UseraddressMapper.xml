@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="awd.cloud.internet.servers.server.dao.UseraddressDao">
+    <resultMap id="UseraddressResultMap" type="awd.cloud.internet.servers.server.entity.UseraddressEntity">
+    
+        <result property="id" column="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="userid" column="userid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+
+        <result property="address" column="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        
+        <result property="userstate" column="userstate" javaType="java.lang.String" jdbcType="CHAR"/>
+
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'UseraddressResultMap'"/>
+        <bind name="tableName" value="'useraddress'"/>
+    </sql>
+    <insert id="insert" parameterType="awd.cloud.internet.servers.server.entity.UseraddressEntity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from useraddress where id =#{id}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="UseraddressResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid" resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+    
+    <select id="getAddressByUserid" resultType="String">
+        select address from useraddress where userid = #{userid} limit 0,1
+    </select>
+    
+    <update id="updateAddressByUserid" parameterType="String">
+    	update address set address = #{address} where userid = #{userid}
+    </update>
+</mapper>

@@ -1,0 +1,104 @@
+<div class="page">
+  <div class="page-content" style="padding-top: 0px">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left" style="display: inline-block">
+          <a href="javascript:void(0);" class="back link">
+            <i class="icon icon-back"></i>
+            <span style="padding-top:3px">新增上门</span>
+          </a>
+        </div>
+        <div>
+			<a href="#" id="addTzsm" class="button button-round active">通知上门</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-block " style="margin-top: 3px">
+      <form id="fm" method="post" enctype="multipart/form-data">
+        <ul style="height:50rem;">
+          <!-- Text inputs -->
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsIcon"></i>
+                <div class="item-title label" style="width: 102px">关押单位：</div>
+                <div class="item-input">
+                	<label {{disabled}} style="font-size: initial;width: inherit;">{{model.dwbhString}}</label>
+                  	<!-- <input type="text" readonly placeholder="关押单位" value="{{model.dwbhString}}"> -->
+                  <input type="text" name="badw" style="display:none" value="{{model.dwbh}}">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsaddressIcon"></i>
+                <div class="item-title label" style="width: 102px">单位地址：</div>
+                <div class="item-input">
+                	<label {{disabled}} style="font-size: initial;width: inherit;">{{model.address}}</label>
+                  <input type="text" name="badwdz" style="display:none" placeholder="填写单位地址"  value="{{model.address}}">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="KssIcon"></i>
+                <div class="item-title label" style="width: 102px;">通知看守所：</div>
+                <div class="item-input">
+                  <div class="item-input">
+                    <input type="text" style="display:none" name="gyjs" value="{{model.gyjs}}" >
+                    <input type="text" placeholder="看守所名称" id="gyjsmc" value="{{model.gyjsString}}">
+                  </div>
+                </div>
+              </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <i class="PcsnameIcon"></i>
+                <div class="item-title label" style="width:102px">嫌疑人姓名：</div>
+                <div class="item-input">
+                  <input type="text" id="name" name="xyrxm" value="{{model.xyrxm}}" placeholder="填写姓名">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li style="padding-top:30px">
+            <div class="item-content">
+              <input type="file" id="flwsimg-box" name="FileData" style="margin-left:23%;position:absolute;opacity:0;" accept="image/*" />
+              <div id="flwsimg" style="width:200px;height:45px;line-height:45px;text-align:center;color:#fff;margin-left:23%;background:#02598e; cursor:pointer;">上传法律文书</div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div style="width:100%;">
+                  <div class="swiper-container swiper-3">
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-wrapper" id="flwsImgDiv">
+                    </div>
+                  </div>
+                  <!-- <img class="fileData_img" src="" id="fileData_img_0" style="width:125px;height:125px;padding: 5px 20px;"/> -->
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label" style="width:250px">点击图片直接删除错误图片！</div>
+              </div>
+            </div>
+          </li>   
+
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="page-content" style="background-color:#fff;z-index:1000">
+	<div class="navbar">
+		<!-- 导航条-->
+		<div class="navbar-inner">
+			<a href="javascript:void(0);" class="link back">
+				<i class="icon icon-back"></i>
+				<span style="padding-top: 3px">返回</span>
+			</a>
+		</div>
+	</div>
+	
+	<div class="page-content">
+	    <div class="list-block " style="margin-top: 0px;">
+	    {{#if isList}}
+	   	 	{{#each model}}
+				{{#each this}}
+					<div class="item-content">
+						<div class="item-inner">
+							<i class="color-blue">{{@key}}：</i><i class="">{{this}}</i>
+					 	</div>
+			      	</div>
+		    	{{/each}}
+			      	<br/>
+			      	<br/>
+			      	<br/>
+			      	<br/>
+		    {{/each}}
+		{{else}}
+			{{#each model}}
+				<div class="item-content">
+					<div class="item-inner">
+						<i class="color-blue">{{@key}}：</i><i class="">{{this}}</i>
+				 	</div>
+		      	</div>
+		    {{/each}}
+
+		{{/if}}
+
+	    </div>
+	</div>
+	
+</div>

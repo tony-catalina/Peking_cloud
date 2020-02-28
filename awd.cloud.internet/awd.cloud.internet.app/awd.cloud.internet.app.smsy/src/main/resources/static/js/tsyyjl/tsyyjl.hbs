@@ -1,0 +1,44 @@
+<div class="page" data-page="yyjl" style="overflow-y:scroll;">
+  <div class="navbar">
+    <!-- 导航条-->
+    <div class="navbar-inner">
+        <a href="javascript:void(0);" class="link backTsyy">
+          <i class="icon icon-back"></i>
+          <span style="padding-top: 3px">预约记录</span>
+        </a>
+    </div>
+  </div>
+  
+  <div class="list-block" style="margin: 0 0;">
+      <ul style="margin-top:50px;">
+        {{#each result}}
+          <li class="accordion-item">
+            <a href="#" class="item-content item-link">
+              <div class="item-inner">
+                <div class="item-title">{{@key}}</div>
+              </div>
+            </a>
+            <div class="accordion-item-content">
+              <div class="content-block">
+                <div class="list-block">
+                  <ul>
+                    {{#each this}}
+                      <li class='item-content tsyyjlxx' style='margin: 10px 0px;' value='{{yyid}}'>
+				          <div class='item-media'><i class='icon recordicon'></i></div>
+				          <div class='item-inner' style='border-bottom: 1px solid #D3D3D3;'>
+				            <div class='item-title' style='color: black;width:50%'>预约时间：</div>
+				            <div class='item-input'>
+				              <span>{{yyrq}}</span>
+				            </div>
+				          </div>
+				       </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+</div>
