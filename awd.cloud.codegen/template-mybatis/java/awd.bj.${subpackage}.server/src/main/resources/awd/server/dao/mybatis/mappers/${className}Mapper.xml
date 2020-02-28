@@ -1,0 +1,97 @@
+<#include "/macro.include"/>
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${basepackage}.dao.${className}Dao">
+    <resultMap id="${className}ResultMap" type="${basepackage}.entity.${className}Entity">
+        <#list table.columns as column>
+        <#if column.javaType=="java.sql.Timestamp">
+		<result property="${column.columnNameLower}" column="${column.columnNameLower}" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<#else>
+		<result property="${column.columnNameLower}" column="${column.columnNameLower}" javaType="${column.javaType}" jdbcType="${column.jdbcType}"/>
+		</#if>
+
+		</#list>
+    </resultMap>
+
+    <!--用于动态生成sql所需的配置-->
+    <sql id="config">
+        <bind name="resultMapId" value="'${className}ResultMap'"/>
+        <bind name="tableName" value="'${table.sqlName}'"/>
+        <bind name="resultJbxxMapId" value="'JbxxInfoResultMap'"/>
+        <bind name="jbxxName" value="'JBXX'"/>
+    </sql>
+    
+	<!--循环查找表字段是否含有rybh，有的话就自动生成jbxxList 方法，没有就不生成-->
+	<#list table.columns as column>
+	<#if column.columnNameLower == "rybh">
+	<select id="jbxxlist"  resultType="java.util.HashMap" >
+   		<include refid="config"/>
+	    <trim>
+	        select jbxx.snbh as snbh,jbxx.XM as xm,jbxx.XB as xb,jbxx.JSH as jsh,
+	        <include refid="BasicMapper.buildSelectField"/>
+	        from  ${r"${tableName}"} ${table.sqlName} ,jbxx jbxx
+	        <where>
+	            <include refid="BasicMapper.buildWhere"/>
+	            <include refid="JbxxMapper.buildJbxxWhere"/>
+	            and ${table.sqlName}.rybh=jbxx.rybh
+	        </where>
+	        <include refid="BasicMapper.buildSortField"/>
+	    </trim>
+    </select>
+    
+    <select id="jbxxcount"  resultType="int">
+	    <include refid="config"/>
+	    <trim>
+	        select count(0) as total
+	        from  ${table.sqlName} ${table.sqlName} ,jbxx jbxx
+	        <where>
+	            <include refid="BasicMapper.buildWhere"/>
+	            <include refid="JbxxMapper.buildJbxxWhere"/>
+	            and ${table.sqlName}.rybh=jbxx.rybh
+	        </where>
+	        <include refid="BasicMapper.buildSortField"/>
+	    </trim>
+    </select>
+	</#if>
+	</#list>
+    
+
+    <insert id="insert" parameterType="${basepackage}.entity.${className}Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildInsertSql"/>
+    </insert>
+
+    <delete id="deleteByPk" parameterType="String">
+        delete from ${table.sqlName} where id =#${r"{"}id${r"}"}
+    </delete>
+
+    <delete id="delete" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildDeleteSql"/>
+    </delete>
+
+    <update id="update" parameterType="awd.framework.common.entity.Entity">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildUpdateSql"/>
+    </update>
+
+    <select id="query" parameterType="awd.framework.common.entity.Entity" resultMap="${className}ResultMap">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildSelectSql"/>
+    </select>
+
+    <select id="count" parameterType="awd.framework.common.entity.Entity" resultType="int">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildTotalSql"/>
+    </select>
+
+    <select id="sequid"  resultType="String">
+        <include refid="config"/>
+        <include refid="BasicMapper.buildIdSqlMysql"/>
+    </select>
+
+ </mapper>

@@ -1,0 +1,23 @@
+<#include "/macro.include"/>
+<#include "/java_copyright.include">
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
+
+@Component
+public interface JlsServersApi {
+    /***
+     *
+     */
+    @GetMapping("/jls_${classNameLower}")
+    public ResponseMessage<PagerResult<${className}Model>> ${classNameLower}List(QueryParam param);
+
+    @PostMapping("/jls_${classNameLower}")
+    public ResponseMessage<String>  ${classNameLower}Save(@RequestBody ${className}Model ${classNameLower}Model);
+
+    @PutMapping("/jls_${classNameLower}/{id}")
+    public ResponseMessage<String> ${classNameLower}Update(@RequestParam(value = "id") String id,@RequestBody ${className}Model ${classNameLower}Model);
+
+    @DeleteMapping("/jls_${classNameLower}/remove/{id}")
+    public ResponseMessage<Integer> ${classNameLower}Delete(@RequestParam(value = "id") String id);
+
+}

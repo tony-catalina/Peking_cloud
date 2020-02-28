@@ -1,0 +1,95 @@
+<!-- <#include "/macro.include"/>
+<#include "/java_copyright.include">
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/base-loading.js"></script>
+    <title>${table.tableAlias}</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/xyy.css">
+    <link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        .kv-group .kv-item .item-lt {
+            color: #000000 !important;
+        }
+        .datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber
+        {
+            text-overflow: ellipsis;
+        }
+        .panel-tool a {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+            filter: alpha(opacity = 60);
+            margin: 0 0 0 2px;
+            vertical-align: top;
+        }
+
+        .lump {
+            float: left;
+            font-size: 12px;
+        }
+
+
+        #contextMenu_${classNameLower}:hover {
+            cursor: pointer;
+        }
+
+        #hint:hover {
+            cursor: pointer;
+        }
+    </style>
+    <style type="text/css">
+        *{
+            font-family:"微软雅黑";
+        }
+    </style>
+</head>
+
+<body class="gray-bg" style="margin: 0px; overflow: hidden;">
+<input id ="userName" name="userName" value="" type="hidden"/>
+<div class="easyui-layout" data-options="fit:true" style="width: 100%; height: 680px; border-right-width: 0px; padding-right: 0px; margin-right: 0px">
+    <div  data-options="region:'center',iconCls:'icon-dingdan'" style="padding: 0px">
+        <div id="toolbar">
+            <input class="f1 easyui-textbox" style="width:100px;"/>
+            时间&nbsp;:&nbsp; <input
+                class="f1 f6 easyui-datebox" id="kssj" style="width: 151px;" /> 至: <input
+                class="f1 f7 easyui-datebox" id="jssj" style="width: 151px;" />
+            <input id="${classNameLower}_ydl" name="s_flag" type="radio" value="" plain="true" style="vertical-align:middle"/><label for="${classNameLower}_ydl" style="vertical-align:middle">按钮 </label>
+            <a class="easyui-linkbutton" id="${classNameLower}_search" plain="true">
+                <i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+            <a class="easyui-linkbutton" plain="true" id="${classNameLower}_add">
+                <i class="fa fa-plus" aria-hidden="true"></i>新增</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"  id="${classNameLower}_update"> 修改</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="${classNameLower}_remove">删除</a>
+        </div>
+        <div id="${classNameLower}yc">
+            <a href="javascript:void(0)"   id="xsycl_${classNameLower}"  style="margin-right:10px;width: 60px; font-size: 14px; font-weight:bold; background:#19AA8D; color: black;text-decoration:none;">显示隐藏</a>
+        </div>
+        <table id="${classNameLower}Id" iconCls="icon-dingdan" data-options="tools:${classNameLower}yc" style="width: 100%;">
+        </table>
+    </div>
+</div>
+<div id="${classNameLower}Form"></div>
+<script type="text/javascript" src="../../js/plugins/seajs/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        base: "../js/",
+        preload: ["plugins/jquery/jquery-1.9.1.min"],
+        map:[
+            [ /^(.*\.(?:css|js))(.*)$/i,'$1$2']
+        ]
+    });
+    // var loginuser=$  {user};//获取当前用户名
+    seajs.use('pages/${subpackage}_${classNameLower}/main');
+</script>
+</body>
+</html>
+

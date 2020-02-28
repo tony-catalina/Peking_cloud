@@ -1,0 +1,134 @@
+<!-- <#include "/macro.include"/>
+<#include "/java_copyright.include">
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/base-loading.js"></script>
+    <title>${table.tableAlias}</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/xyy.css">
+    <link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.css">
+    <!-- 表单样式引入 -->
+
+
+    <style type="text/css">
+        .kv-group .kv-item .item-lt {
+            color: #000000 !important;
+        }
+        .datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber
+        {
+            text-overflow: ellipsis;
+        }
+        .panel-tool a {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+            filter: alpha(opacity = 60);
+            margin: 0 0 0 2px;
+            vertical-align: top;
+        }
+
+        .lump {
+            float: left;
+            font-size: 12px;
+        }
+
+        #contextMenu_jbxx:hover {
+            cursor: pointer;
+        }
+
+        *{
+            font-family:"微软雅黑";
+        }
+
+    </style>
+    <style type="text/css">
+        *{
+            font-family:"微软雅黑";
+        }
+        #xsycl_${classNameLower}:hover{
+            color: #b1d1f9;
+            cursor: pointer;
+        }
+        #xsycl_${classNameLower}{
+            color:white;
+        }
+    </style>
+</head>
+
+
+<!-- 读卡器 -->
+<body  class="gray-bg" style="margin: 0px; overflow: hidden;">
+
+
+
+<div data-options="region:'center',iconCls:'icon-dingdan'" id='sbxt' style="padding: 0px;">
+
+
+    <div title="${table.tableAlias}" style="padding:0px;overflow: hidden;" >
+        <div id="jbxxyc">
+            <div id="toolbar">
+                &nbsp;&nbsp;&nbsp;人员编号: <input id="s_snbh" class="easyui-textbox" />
+                &nbsp;&nbsp;<input id="zs_state" value="" name="zszt" type="radio"/><label for="zs_state" style="height:13px;vertical-align:text-top;margin-top:0;">在所</label>&nbsp;&nbsp;&nbsp;
+                    <input id="cs_state" value="" name="zszt" type="radio" /><label for="cs_state" style="height:13px;vertical-align:text-top;margin-top:0;">出所</label>
+                &nbsp;&nbsp;&nbsp;	<input id="all_state" value="" name="zszt" type="radio" checked/><label for="all_state" style="height:13px;vertical-align:text-top;margin-top:0;">全部</label>
+
+                <a class="easyui-linkbutton" id="find" plain="true"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+                <a class="easyui-linkbutton" plain="true" id="${classNameLower}_add"><i class="fa fa-plus" aria-hidden="true"></i>增加</a>
+                <a class="easyui-linkbutton" plain="true"iconCls="icon-remove"   id="${classNameLower}_delete" style="margin: 0px 4px 0px 4px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>删除</a>
+                <a class="easyui-linkbutton" plain="true"iconCls="icon-edit" id="${classNameLower}_bfsh"><i class="fa fa-plus" aria-hidden="true"></i>修改</a>
+                <a class="easyui-linkbutton" id="${classNameLower}_print"  plain="true" ><i class="fa fa-search"  aria-hidden="true"></i>导出Excel</a>
+                <a href="#" class="easyui-linkbutton" plain="true"
+                   style="float: right;" id="xsycl_jbxx" >显示隐藏</a>
+            </div>
+        </div>
+        <table id="jbxxId" data-options="tools:jbxxyc" iconCls="icon-dingdan" class="generalHi"  style="width: 100%"></table>
+    </div>
+</div>
+
+<!--第二行第二列-->
+<div class="">
+    <div class="col-xs-12" style="width: 100%">
+
+        <div id="ycl_${classNameLower}">
+
+        </div>
+        <table id="${classNameLower}Id" iconCls="icon-dingdan" data-options="tools:${classNameLower}yc"
+               style="width: 100%; height: 600px">
+        </table>
+    </div>
+</div>
+
+
+<!-- 鼠标右键 -->
+<div id="rightmenu"></div>
+<!-- 右键查看心率 -->
+<div id = "xlForm"></div>
+<!-- 高 级查询-->
+<div id="gjSelectdialog"></div>
+<div id="${classNameLower}Form"></div>
+<script type="text/javascript" src="../../js/plugins/seajs/sea.js?ver={date()}"></script>
+<script type="text/javascript">
+    seajs.config({
+        base: "../js/",
+        preload: ["plugins/jquery/jquery-1.9.1.min"],
+        map:[
+            [ /^(.*\.(?:css|js))(.*)$/i,'$1$2?ver={date()}']
+        ]
+    });
+    //var loginuser={user};//获取用户信息 补$
+    seajs.use('pages/${subpackage}_${classNameLower}/main');
+</script>
+
+</body>
+</html>
+
+
