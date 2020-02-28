@@ -1,0 +1,180 @@
+spring:
+  redis:
+    hostName: ${redisurl:192.168.4.30}
+    port: ${redisport:6379}
+    pool:
+      maxActive: 32
+      maxWait: 300 
+      maxIdle: 16
+      minIdle: 8
+    timeout: 0
+  rabbitmq:
+    host: ${rabbitmqurl:192.168.4.30}
+    port: ${rabbitmqport:5672}
+    username: ${rabbitmqname:awd}
+    password: ${rabbitmqpass:awd}
+    publisher-confirms: true
+    publisher-returns: true
+    template:
+      mandatory: true
+  jta:
+    status: true
+    enabled: true
+    service: com.atomikos.icatch.standalone.UserTransactionServiceFactory
+    max-actives: 200
+    enable-logging: false
+    atomikos:
+      datasource:
+        min-pool-size: 5
+        max-life-time: 60 
+        max-idle-time: 60 
+        maintenance-interval: 60 
+        reap-timeout: 0
+        xa-data-source-class-name: com.alibaba.druid.pool.xa.DruidXADataSource
+        xa-properties:
+          url : ${urlW:jdbc:mysql://192.168.4.30:3307/soa_kss?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+          username: ${myUserW:root}
+          password: ${myPassW:root}
+          initialSize: 5
+          minIdle: 5
+          maxActive: 20               
+          # 打开PSCache，并且指定每个连接上PSCache的大小 
+          poolPreparedStatements: true
+          maxPoolPreparedStatementPerConnectionSize: 20
+          filters: stat,wall
+          # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+          # 合并多个DruidDataSource的监控数据
+          useGlobalDataSourceStat: true
+        max-pool-size: 200
+        borrow-connection-timeout: 1000
+      connectionfactory:
+        max-pool-size: 200
+        local-transaction-mode: true
+awd:
+  mis:
+    name: 监管云平台-拘留所基本服务
+    version: 1.0.0
+    dynamic:
+        datasource:
+           write_ds:
+                min-pool-size: 5
+                max-life-time: 60
+                max-idle-time: 60 
+                maintenance-interval: 60 
+                reap-timeout: 0
+                xa-data-source-class-name: com.alibaba.druid.pool.xa.DruidXADataSource
+                xa-properties:
+                  url: ${urlW:jdbc:mysql://192.168.4.30:3307/soa_kss?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+                  username: ${myUserW:root}
+                  password: ${myPassW:root}
+                  initialSize: 5
+                  minIdle: 5
+                  maxActive: 20               
+                  # 打开PSCache，并且指定每个连接上PSCache的大小 
+                  poolPreparedStatements: true
+                  maxPoolPreparedStatementPerConnectionSize: 20
+                  filters: stat,wall
+                  # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+                  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+                  # 合并多个DruidDataSource的监控数据
+                  useGlobalDataSourceStat: true
+                max-pool-size: 200
+                borrow-connection-timeout: 1000
+           read_ds:
+                min-pool-size: 5
+                max-life-time: 60
+                max-idle-time: 60 
+                maintenance-interval: 60 
+                reap-timeout: 0
+                xa-data-source-class-name: com.alibaba.druid.pool.xa.DruidXADataSource
+                xa-properties:
+                  url: ${urlR:jdbc:mysql://192.168.4.30:3307/soa_kss?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+                  username: ${myUserR:root}
+                  password: ${myPassR:root}
+                  initialSize: 5
+                  minIdle: 5
+                  maxActive: 20               
+                  # 打开PSCache，并且指定每个连接上PSCache的大小 
+                  poolPreparedStatements: true
+                  maxPoolPreparedStatementPerConnectionSize: 20
+                  filters: stat,wall
+                  # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+                  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+                  # 合并多个DruidDataSource的监控数据
+                  useGlobalDataSourceStat: true
+                max-pool-size: 200
+                borrow-connection-timeout: 1000
+mybatis:
+  dynamicDatasource: true                
+swagger2:
+  package: awd.bj.jls.servers.controller
+  show: 
+    dev: ${apidev:false}
+    pro: ${apipro:true}
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    register-with-eureka: true 
+    fetch-registry: true  
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.30:3001/eureka/,http://192.168.4.30:3002/eureka/,http://192.168.4.30:3003/eureka/}
+feign:
+  hystrix:
+      enabled: true
+      
+hystrix:  
+  threadpool:
+    default:
+      coreSize: 200 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数，默认值-1
+      queueSizeRejectionThreshold: 800 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝，默认值5
+  command:  
+      default:  
+        execution:  
+          isolation:  
+            thread:  
+              timeoutInMilliseconds: ${hystrixtime:30000}
+org:
+   dromara:
+     raincat:
+       txManagerUrl: ${txurl:http://192.168.4.30:8761}
+       serializer: kryo
+       nettySerializer: kryo
+       compensation: true
+       compensationCacheType : db
+       txDbConfig :
+              driverClassName  : ${txdriver:com.mysql.jdbc.Driver}
+              url :  ${txdb:jdbc:mysql://192.168.4.30:3307/soa_logs?useUnicode=true&amp;characterEncoding=utf8}
+              username : ${txuser:root}
+              password : ${txpass:root}
+logging:
+  level:
+    root: ${loglevel:INFO}
+    awd.bj.jls.servers.dao: debug
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+rabbit:
+  exchange: awdMessage
+  #一般消息
+  queueOrdinary: ordinary-queue
+  #紧急消息
+  queueInstancy: instancy-queue
+  routingKeyOne: awd.queue.one
+  routingKeyTwo: awd.queue.two
+server:
+  max-http-header-size: 10000000 
+  port: ${port:14101}
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+
+

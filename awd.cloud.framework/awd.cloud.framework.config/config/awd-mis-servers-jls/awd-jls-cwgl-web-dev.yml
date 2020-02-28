@@ -1,0 +1,44 @@
+awd:
+  mis:
+    name: 财务管理应用
+    version: 1.0.0
+
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+feign:
+  hystrix:
+      enabled: true
+hystrix:  
+  command:  
+      default:  
+        execution:  
+          isolation:  
+            thread:  
+              timeoutInMilliseconds: ${hystrixtime:30000}
+
+logging:
+  level:
+    root: ${loglevel:INFO}
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+  
+server:
+  max-http-header-size: 10000000 
+  port: ${port:14102}
+  tomcat:
+    max-http-post-size: 4048576
+  session:
+    timeout: ${timeout:3600}
+    cookie:
+      name: session_cwgl
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain     
+
+

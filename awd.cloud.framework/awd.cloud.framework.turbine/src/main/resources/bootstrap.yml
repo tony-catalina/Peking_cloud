@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: awdmis-turbine
+
+server:
+  port: ${port:3007}
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}     
+  client:
+    register-with-eureka: true 
+    fetch-registry: true 
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.11:3001/eureka/,http://192.168.4.11:3002/eureka/,http://192.168.4.11:3003/eureka/}
+
+turbine:
+  aggregator:
+    clusterNameExpression: new String("default")
+    clusterConfig: default
+    #http://localhost:8095/turbine.stream?cluster=POLICY-SERVICE
+  appConfig: ${service.id}
+  # 1. clusterNameExpression指定集群名称，默认表达式appName；此时：turbine.aggregator.clusterConfig需要配置想要监控的应用名称
+  # 2. 当clusterNameExpression: default时，turbine.aggregator.clusterConfig可以不写，因为默认就是default
+  # 3. 当clusterNameExpression: metadata['cluster']时，假设想要监控的应用配置了eureka.instance.metadata-map.cluster: ABC，则需要配置，同时turbine.aggregator.clusterConfig: ABC
+  
+  #spring:
+  #rabbitmq:
+  #  host: 219.230.50.73
+  #  port: 5672
+  #  username: guest
+  #  password: guest

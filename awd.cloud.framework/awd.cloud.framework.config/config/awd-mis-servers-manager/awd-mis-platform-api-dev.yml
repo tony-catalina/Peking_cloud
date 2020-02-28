@@ -1,0 +1,81 @@
+spring:
+  redis:
+    hostName: ${redisurl:192.168.4.30}
+    port: ${redisport:6379}
+    pool:
+      maxActive: 32
+      maxWait: 300 
+      maxIdle: 16
+      minIdle: 8
+    timeout: 0  
+  rabbitmq:
+    host: ${rabbitmqurl:192.168.4.30}
+    port: ${rabbitmqport:5672}
+    username: ${rabbitmqname:awd}
+    password: ${rabbitmqpass:awd}
+    publisher-confirms: true
+    publisher-returns: true
+    template:
+      mandatory: true          
+awd:
+  mis:
+    name: 监管云平台-业务平台接口
+    version: 1.0.0
+swagger2:
+  package:  awd.cloud.platform.controller
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    register-with-eureka: true 
+    fetch-registry: true  
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.30:3001/eureka/,http://192.168.4.30:3002/eureka/,http://192.168.4.30:3003/eureka/}
+feign:
+  hystrix:
+      enabled: true
+hystrix:  
+  command:  
+      default:  
+        execution:  
+          isolation:  
+            thread:  
+              timeoutInMilliseconds: ${hystrixtime:30000}
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+logging:
+  level:
+    root: ${loglevel:INFO}
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+  
+rabbit:
+  exchange: awdMessage
+  #一般消息
+  queueOrdinary: ordinary-queue
+  #紧急消息
+  queueInstancy: instancy-queue
+  routingKeyOne: awd.queue.one
+  routingKeyTwo: awd.queue.two
+  
+server:
+  max-http-header-size: 10000000 
+  port: ${port:12106}
+  tomcat:
+    max-http-post-size: 4048576
+  session:
+    timeout: ${session.timeout:3600}
+    cookie:
+      name: session_platform_api
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain    

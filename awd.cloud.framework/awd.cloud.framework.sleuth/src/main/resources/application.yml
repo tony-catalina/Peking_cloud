@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: awdmis-dataflow-zipkin
+
+server:
+  port: ${port:3004}
+  
+  
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}     
+  client:
+    register-with-eureka: true 
+    fetch-registry: true 
+    serviceUrl:
+      defaultZone: http://192.168.4.11:3001/eureka/,http://192.168.4.11:3002/eureka/,http://192.168.4.11:3003/eureka/
+  
+

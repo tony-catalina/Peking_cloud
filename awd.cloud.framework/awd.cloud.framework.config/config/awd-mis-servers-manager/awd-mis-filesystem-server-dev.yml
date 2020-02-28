@@ -1,0 +1,43 @@
+swagger2:
+  package:  awd.mis.filesystem.controller
+  show: 
+    dev: ${apidev:false}
+    pro: ${apipro:true} 
+    
+feign:
+  hystrix:
+      enabled: true
+hystrix:  
+  command:  
+      default:  
+        execution:  
+          isolation:  
+            thread:  
+              timeoutInMilliseconds: ${hystrixtime:30000}
+
+logging:
+  level:
+    root: ${loglevel:INFO}
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB        
+
+server:
+  max-http-header-size: 50000000 
+  port: ${port:9800}      
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    register-with-eureka: true 
+    fetch-registry: true  
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.30:3001/eureka/,http://192.168.4.30:3002/eureka/,http://192.168.4.30:3003/eureka/}

@@ -1,0 +1,143 @@
+spring:
+  application:
+    name: ${hostname:awd-mis-gateway-server}
+  cloud:
+    inetutils:
+      preferred-networks: ${hostip:172.20.10.4}
+  http:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+            
+logging:
+  level:
+    root: ${loglevel:INFO}
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+  
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10 
+    prefer-ip-address: true 
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}     
+  client:
+    register-with-eureka: true 
+    fetch-registry: true 
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.50:3001/eureka/,http://192.168.4.50:3002/eureka/,http://192.168.4.50:3003/eureka/}
+zuul:
+#  ignored-services: '*'
+#  ignored-patterns: /appstore/app/**
+  host:
+    connect-timeout-millis: 80000
+    socket-timeout-millis: 80000  
+  routes:
+    eureka1-server:
+      path: /eureka1/**
+      url: http://192.168.4.50:3001
+      strip-prefix: true
+      sensitive-headers:
+    eureka2-server:
+      path: /eureka2/**
+      url: http://192.168.4.50:3002
+      strip-prefix: true
+      sensitive-headers:
+    eureka3-server:
+      path: /eureka3/**
+      url: http://192.168.4.50:3003
+      strip-prefix: true
+      sensitive-headers:     
+    config-server:
+      path: /config/**
+      service-id: awd-mis-config-server
+      strip-prefix: true
+      sensitive-headers:
+    logs-server:
+      path: /logs/**
+      service-id: awd-mis-logs-server
+      strip-prefix: true
+      sensitive-headers:
+    activiti-server:
+      path: /activiti/**
+      service-id: awd-mis-activiti-server
+      strip-prefix: true
+      sensitive-headers:  
+    mananger-server:
+      path: /manager/**
+      service-id: awd-mis-manager-server
+      strip-prefix: true
+      sensitive-headers: 
+    analyse-server:
+      path: /analyse/**
+      service-id: awd-mis-analyse-server
+      strip-prefix: true
+      sensitive-headers:  
+    kss-server:
+      path: /kss/**
+      service-id: awd-kss-server
+      strip-prefix: true
+      sensitive-headers: 
+    jls-server:
+      path: /jls/**
+      service-id: awd-jls-server
+      strip-prefix: true
+      sensitive-headers: 
+    jds-server:
+      path: /jds/**
+      service-id: awd-jds-server
+      strip-prefix: true
+      sensitive-headers:
+    sjs-server:
+      path: /sjs/**
+      service-id: awd-sjs-server
+      strip-prefix: true
+      sensitive-headers:
+    akyy-server:
+      path: /akyy/**
+      service-id: awd-akyy-server
+      strip-prefix: true
+      sensitive-headers:
+    cas-server:
+      path: /cas/**
+      url: http://192.168.4.50:8899/cas
+      strip-prefix: true
+      sensitive-headers: 
+    report-server:
+      path: /report/**
+      url: http://192.168.4.50:8086/report
+      strip-prefix: true
+      sensitive-headers: 
+    jslsy-server:
+      path: /jlssy/**
+      service-id: awd-jls-syqt-web
+      strip-prefix: true
+      sensitive-headers: 
+    platform-web:
+      path: /platform/**
+      url: http://192.168.4.43:12104/
+      strip-prefix: true
+      sensitive-headers:   
+    tx-manager:
+      path: /tx/**
+      url: http://192.168.4.50:8761
+      strip-prefix: true
+      sensitive-headers:   
+                     
+hystrix:
+  threadpool:
+    default:
+      coreSize: 200 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数，默认值-1
+      queueSizeRejectionThreshold: 800 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝，默认值5
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: ${hystrixtime:80000}
+server:
+  port: ${port:3007}        

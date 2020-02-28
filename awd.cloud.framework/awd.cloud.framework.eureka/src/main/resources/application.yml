@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ${hostname:eureka1}
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds: 1 
+    prefer-ip-address: true 
+    ip-address: ${spring.cloud.client.ipAddress}:${server.port}
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1200000  
+  client:
+    register-with-eureka: false 
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://192.168.4.107:3001/eureka/,http://192.168.4.107:3002/eureka/,http://192.168.4.107:3003/eureka/}
+logging:
+  level:
+    root: INFO
+  file: log.log
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file.max-size: 200MB
+  
+server:
+  port: ${port:3001}
